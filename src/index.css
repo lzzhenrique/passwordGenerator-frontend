@@ -11,3 +11,40 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+h1 {
+  margin-bottom: 0;
+}
+
+p {
+  font-weight: 500;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkbox {
+  padding: 0 0 10% 0;
+  font-size: larger;
+  font-weight: 500;
+}
+
+.passwordLength {
+  width: 5rem;
+  margin-left: .5rem;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.options {
+  margin: auto;
+}
