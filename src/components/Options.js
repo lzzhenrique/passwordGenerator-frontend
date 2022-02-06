@@ -1,14 +1,13 @@
 import React from 'react';
 
-const check = (i) => {
-  if (i === 5) return <option value='' selected disabled hidden key={i}></option>
-  if (i > 5) return <option name='passwordLength' value={i} key={i}>{i}</option>
-}
+const LENGTH_OPTIONS = Array(16).fill(null);
+const START_VALUE = 5;
 
-const Options = () => {
-  const lengthOptions = Array(16).fill(null);
+const disabledOption = (i) => <option value='' defaultValue hidden key={i} />
+const normalOption = (i) => <option value={i} key={i}>{i}</option>
 
-  return ( lengthOptions.map((_el, i) => check(i)))
-}
+const check = (i) => i === START_VALUE ? disabledOption(i) : normalOption(i);
+
+const Options = () => (LENGTH_OPTIONS.map((_el, i) => i >= START_VALUE ? check(i) : ''));
 
 export default Options;

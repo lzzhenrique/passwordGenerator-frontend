@@ -1,18 +1,29 @@
 import React from 'react';
 
-const options = ['numbers', 'lowercase', 'simbols', 'uppercase'];
+const options = ['numbers', 'lowerCase', 'simbols', 'upperCase'];
 
-const Input = ({ type, className, onChange }) => {
+const formatTitles = (name) => {
+  const lowerAll = name.toLowerCase().slice(1);
+  const upperFirst = name.charAt(0).toUpperCase();
+  
+  return `${upperFirst}${lowerAll}`;
+}
+
+const Input = ({ type, className, handleChange }) => {
   return options.map((option) => {
     return(
-      <div className={className}>
-        <label htmlFor={option}>
-          {`${option.charAt(0).toUpperCase() + option.slice(1)}`}
-          <input 
-            onChange={ (e) => onChange(e) }
-            id={option}
-            type={type}
-            name={option}></input>
+      <div
+        className={ className }
+        key={ option }
+      >
+        <label htmlFor={ option }>
+          { formatTitles(option) }
+          <input
+            id={ option }
+            type={ type }
+            name={ option }
+            onChange={ (e) => handleChange(e) }
+          />
         </label>
       </div>
     );
