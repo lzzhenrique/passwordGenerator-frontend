@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Input from '../components/Input';
 import Options from '../components/Options.js'
 import http from '../services/api';
+import './style/encript.css';
 
 export default function Encript() {
   const [passwordOptions, setpasswordOptions] = useState({
@@ -30,10 +31,13 @@ export default function Encript() {
   }
 
   async function copyToClipboard () {
+    if (!password) return;
+
     await navigator.clipboard.writeText(password);
     setisCopied(true);
-  }
 
+    setTimeout(() => setisCopied(false), 1000);
+  }
 
   useEffect(() => {
     const { 
@@ -53,25 +57,26 @@ export default function Encript() {
   }, [passwordOptions]);
 
   return (
-    <div className='child'>
-      <h1 className='title'>Make your password!</h1>
+    <div className='home-container'>
       <div className='form'>
         <form>
-          <div>
-            <p>Password Length:
+          <div className='select-container'>
+            <label htmlFor='pwd-length' >
+              Length:
               <select
+                id='pwd-length'
                 onChange= { handleChange }
                 className='passwordLength' name="passwordLength"
               >
                 <Options/>
               </select>
-            </p>
+            </label>
           </div>
-          <div className='checkbox'>
+          <div className='checkbox-container'>
             <Input
               handleChange= { handleChange }
               type="checkbox"
-              className="checks"
+              className='checkbox'
             />
           </div>
           <button
@@ -79,17 +84,19 @@ export default function Encript() {
             disabled={ button }
             onClick={ () => sendPasswordOptions() }
           >
-            Make your password!
+            Generate password
           </button>
         </form>
-        <div>
+        <div
+          className='copy-result'
+        >
           <input 
             type="text"
             className='ready-password-input'
             value={ password }
             readOnly
-            placeholder='Your password will appear here'
-            />
+            placeholder='New password'
+          />
           <button
             type="button"
             className='ready-password-button'
