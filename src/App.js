@@ -1,11 +1,10 @@
 import React from 'react';
-import Encript from './pages/encript.js'
-// import { Route, Routes, Navigate } from 'react-router-dom';
+import Encript from './pages/encript';
 import './App.css';
 
 function App() {
   return (
-    <div className='container'>
+    <div className="container">
       <Encript />
     </div>
   );
