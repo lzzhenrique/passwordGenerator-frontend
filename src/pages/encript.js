@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Input from '../components/Input';
-import Options from '../components/Options.js'
+import Select from '../components/Select';
 import http from '../services/api';
 import './style/encript.css';
+
+const ONE_SECOND = 1000;
 
 export default function Encript() {
   const [passwordOptions, setpasswordOptions] = useState({
@@ -16,67 +18,59 @@ export default function Encript() {
   const [password, setPassword] = useState('');
   const [isCopied, setisCopied] = useState(false);
 
-  
+  const handleChange = useCallback((event) => {
+    console.log(event);
+    const { name, type, checked, value } = event.target;
 
-  function handleChange({ target: { name, type, checked, value } }) {
     const inputValue = type === 'checkbox' ? checked : value;
-    
-    setpasswordOptions({ ...passwordOptions, [name]: inputValue});
-  }
 
-  async function sendPasswordOptions () {
+    setpasswordOptions({ ...passwordOptions, [name]: inputValue });
+  }, []);
+
+  async function sendPasswordOptions() {
     const { finalPassword } = await http.createPassword(passwordOptions);
 
     setPassword(finalPassword);
   }
 
-  async function copyToClipboard () {
+  async function copyToClipboard() {
     if (!password) return;
 
     await navigator.clipboard.writeText(password);
     setisCopied(true);
 
-    setTimeout(() => setisCopied(false), 1000);
+    setTimeout(() => setisCopied(false), ONE_SECOND);
   }
 
   useEffect(() => {
-    const { 
+    const {
       numbers,
       lower,
       simbols,
       upper,
-      passwordLength
+      passwordLength,
     } = passwordOptions;
-  
-    if(passwordLength && (numbers || lower || simbols || upper)) {
+
+    if (passwordLength && (numbers || lower || simbols || upper)) {
       return setButton(false);
     }
-    if(!numbers && !lower && !simbols && !upper) {
+    if (!numbers && !lower && !simbols && !upper) {
       return setButton(true);
     }
   }, [passwordOptions]);
 
   return (
-    <div className='home-container'>
-      <div className='form'>
+    <div className="home-container">
+      <div className="form">
         <form>
-          <div className='select-container'>
-            <label htmlFor='pwd-length' >
-              Length:
-              <select
-                id='pwd-length'
-                onChange= { handleChange }
-                className='passwordLength' name="passwordLength"
-              >
-                <Options/>
-              </select>
-            </label>
-          </div>
-          <div className='checkbox-container'>
+          <Select
+            handleChange={ handleChange }
+          />
+          <div className="checkbox-container">
             <Input
-              handleChange= { handleChange }
+              handleChange={ handleChange }
               type="checkbox"
-              className='checkbox'
+              className="checkbox"
             />
           </div>
           <button
@@ -88,24 +82,24 @@ export default function Encript() {
           </button>
         </form>
         <div
-          className='copy-result'
+          className="copy-result"
         >
-          <input 
+          <input
             type="text"
-            className='ready-password-input'
+            className="ready-password-input"
             value={ password }
             readOnly
-            placeholder='New password'
+            placeholder="New password"
           />
           <button
             type="button"
-            className='ready-password-button'
+            className="ready-password-button"
             onClick={ () => copyToClipboard() }
           >
             <span>{ isCopied ? 'Copied!' : 'Copy' }</span>
           </button>
         </div>
       </div>
-      </div>
-  )
+    </div>
+  );
 }
