@@ -1,6 +1,7 @@
 {
   "short_name": "chromeextension",
   "name": "Password Generator",
+  "manifest_version": 2,
   "browser_action": {
     "default_popup": "index.html",
     "default_title": "Password Generator"
@@ -9,9 +10,7 @@
     "activeTab"
   ],
   "icons": {
-    "16": "react16.png",
-    "48": "react48.png",
-    "128": "react128.png"
+    "64": "logo.png"
   },
   "version": "1.0"
 }

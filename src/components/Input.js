@@ -9,23 +9,19 @@ const formatTitles = (name) => {
   return `${upperFirst}${lowerAll}`;
 }
 
-const Input = ({ type, className, handleChange }) => {
+const Input = ({ type, handleChange, className }) => {
   return options.map((option) => {
     return(
-      <div
-        className={ className }
-        key={ option }
-      >
-        <label htmlFor={ option }>
-          { formatTitles(option) }
-          <input
-            id={ option }
-            type={ type }
-            name={ option }
-            onChange={ (e) => handleChange(e) }
-          />
-        </label>
-      </div>
+      <label htmlFor={ option }>
+        { formatTitles(option) }
+        <input
+          className={ className }
+          id={ option }
+          type={ type }
+          name={ option }
+          onChange={ (e) => handleChange(e) }
+        />
+      </label>
     );
   });
 };

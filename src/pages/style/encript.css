@@ -1,4 +1,99 @@
+button, label, input, select {
+  cursor: pointer;
+}
+
+label, h1, input, select {
+  color: #C7EDE4;
+}
+
+select {
+  background-color: #202C39;
+  border: 2px #C7EDE4 solid;
+  font-weight: bolder;
+  border-radius: 4px;
+}
+
+select option {
+  background-color: #202C39;
+  font-weight: bold;
+}
+
+button {
+  font-weight: bolder;
+  margin-top: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  color: #C7EDE4;
+  border: 2px #C7EDE4 solid;
+  background-color: transparent;
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.home-container {
+  border-radius: 5px;
+  height: 200px;
+  width: 400px;
+  background-color: #202C39;
+}
+
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 5px 0;
+  font-size: larger;
+  font-weight: 500;
+}
+
+.select-container {
+  font-size: larger;
+  font-weight: 500;
+}
+
+.form {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+button:disabled {
+  pointer-events: none;
+  opacity: 0.3;
+}
+
 .ready-password-button {
-  width: 30rem;
-  color: aqua;
+  width: 50px;
+}
+
+button:hover {
+  background-color: #283845
+}
+
+.ready-password-input {
+  width: 120px;
+  padding: 5px;
+  border-radius: 4px;
+  border: 2px #C7EDE4 solid;
+  background-color: #C7EDE4;
+}
+
+::placeholder {
+  color: #283845;
+}
+
+.copy-result {
+  display: flex;
+  flex-direction: column;
+}
+
+.passwordLength {
+  width: 50px;
+  margin-left: 8px;
+  padding-left: 3%;
+  padding-right: 3%;
 }
