@@ -67,7 +67,12 @@ button:disabled {
 }
 
 .ready-password-button {
-  width: 50px;
+  width: 70px;
+}
+
+.ready-password {
+  margin: 0;
+  padding: 0;
 }
 
 button:hover {
@@ -75,11 +80,14 @@ button:hover {
 }
 
 .ready-password-input {
-  width: 120px;
-  padding: 5px;
-  border-radius: 4px;
-  border: 2px #C7EDE4 solid;
+  align-items: center;
   background-color: #C7EDE4;
+  border: 2px #C7EDE4 solid;
+  border-radius: 4px;
+  display: flex;
+  height: 30px;
+  justify-content: center;
+  width: 142px;
 }
 
 ::placeholder {

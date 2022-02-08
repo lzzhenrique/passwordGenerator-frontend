@@ -19,13 +19,12 @@ export default function Encript() {
   const [isCopied, setisCopied] = useState(false);
 
   const handleChange = useCallback((event) => {
-    console.log(event);
     const { name, type, checked, value } = event.target;
 
     const inputValue = type === 'checkbox' ? checked : value;
 
     setpasswordOptions({ ...passwordOptions, [name]: inputValue });
-  }, []);
+  }, [passwordOptions]);
 
   async function sendPasswordOptions() {
     const { finalPassword } = await http.createPassword(passwordOptions);
@@ -43,20 +42,14 @@ export default function Encript() {
   }
 
   useEffect(() => {
-    const {
-      numbers,
-      lower,
-      simbols,
-      upper,
-      passwordLength,
-    } = passwordOptions;
+    const { passwordLength } = passwordOptions;
 
-    if (passwordLength && (numbers || lower || simbols || upper)) {
-      return setButton(false);
-    }
-    if (!numbers && !lower && !simbols && !upper) {
-      return setButton(true);
-    }
+    const pwdOptions = Object.values(passwordOptions);
+    const atLeastTwo = pwdOptions.filter((optionChecked) => optionChecked === true);
+
+    if (passwordLength && atLeastTwo.length >= 2) return setButton(false);
+
+    return setButton(true);
   }, [passwordOptions]);
 
   return (
@@ -84,13 +77,18 @@ export default function Encript() {
         <div
           className="copy-result"
         >
-          <input
+          <div
             type="text"
             className="ready-password-input"
             value={ password }
             readOnly
-            placeholder="New password"
-          />
+          >
+            <span
+              className="ready-password"
+            >
+              { password }
+            </span>
+          </div>
           <button
             type="button"
             className="ready-password-button"
